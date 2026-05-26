@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import CircuitBackground from './CircuitBackground.astro';
 
 interface Props {
   title?: string;
@@ -21,19 +22,25 @@ const {
 ---
 
 <section class="container-x py-20 md:py-24">
-  <div class="relative overflow-hidden rounded-3xl gradient-hero text-white p-10 md:p-16">
-    <div class="absolute inset-0 grid-pattern opacity-20"></div>
+  <div class="relative overflow-hidden rounded-3xl bg-night text-white p-10 md:p-16 lg:p-20" data-reveal>
+    <CircuitBackground />
+    <div class="absolute inset-0 grid-pattern opacity-40"></div>
     <div class="relative max-w-3xl">
-      <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl leading-tight text-balance">
-        {title}
+      <span class="eyebrow-dark mb-5">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-cyber-400 animate-pulse"></span>
+        Let's build
+      </span>
+      <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] text-balance">
+        {title.split(' ').slice(0, -2).join(' ')}
+        <span class="text-gradient-cyber"> {title.split(' ').slice(-2).join(' ')}</span>
       </h2>
-      <p class="mt-5 text-brand-100/85 text-lg text-pretty">{description}</p>
-      <div class="mt-8 flex flex-wrap gap-4">
+      <p class="mt-6 text-white/75 text-lg md:text-xl text-pretty">{description}</p>
+      <div class="mt-9 flex flex-wrap gap-4">
         <a href={primaryHref} class="btn btn-accent">
           {primaryLabel}
           <Icon name="lucide:arrow-right" class="w-4 h-4" />
         </a>
-        <a href={secondaryHref} class="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">
+        <a href={secondaryHref} class="btn btn-glass">
           {secondaryLabel}
         </a>
       </div>

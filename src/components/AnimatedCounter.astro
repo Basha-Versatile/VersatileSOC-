@@ -1,0 +1,53 @@
+---
+interface Props {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+  class?: string;
+}
+
+const { value, suffix = '', prefix = '', duration = 1800, class: className = '' } = Astro.props;
+---
+
+<span
+  class={`counter ${className}`}
+  data-counter-target={value}
+  data-counter-suffix={suffix}
+  data-counter-prefix={prefix}
+  data-counter-duration={duration}
+>{prefix}0{suffix}</span>
+
+<script>
+  const formatter = new Intl.NumberFormat('en-IN');
+  const items = document.querySelectorAll<HTMLElement>('.counter');
+
+  const animate = (el: HTMLElement) => {
+    if (el.dataset.counterDone === '1') return;
+    el.dataset.counterDone = '1';
+    const target = Number(el.dataset.counterTarget ?? '0');
+    const suffix = el.dataset.counterSuffix ?? '';
+    const prefix = el.dataset.counterPrefix ?? '';
+    const duration = Number(el.dataset.counterDuration ?? '1800');
+    const start = performance.now();
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+    const step = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      const v = Math.round(target * ease(p));
+      el.textContent = `${prefix}${formatter.format(v)}${suffix}`;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) animate(entry.target as HTMLElement);
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  items.forEach((el) => io.observe(el));
+</script>

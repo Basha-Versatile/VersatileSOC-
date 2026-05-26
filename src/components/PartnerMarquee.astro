@@ -1,0 +1,43 @@
+---
+// Placeholder partner / ecosystem labels — replace with real logos once available.
+// Using text glyphs keeps the marquee on-brand and editable without sourcing logo assets.
+const partners = [
+  'TSMC',
+  'Samsung Foundry',
+  'Arm',
+  'RISC-V Intl.',
+  'Synopsys',
+  'Cadence',
+  'Siemens EDA',
+  'NVIDIA',
+  'Intel Foundry',
+  'AWS',
+  'Microsoft Azure',
+  'GlobalFoundries',
+];
+const items = [...partners, ...partners]; // duplicated for seamless loop
+---
+
+<section class="relative py-14 md:py-16 bg-night-900 text-white overflow-hidden border-y border-white/5">
+  <div class="absolute inset-0 dotted-pattern opacity-40"></div>
+  <div class="container-x relative">
+    <p
+      class="text-center text-xs uppercase tracking-[0.32em] text-cyber-300/80 font-semibold mb-8"
+      data-reveal
+    >
+      <!-- TODO[placeholder]: Replace ecosystem labels below with real partner logos when available -->
+      Built on the world's leading silicon, EDA and cloud stack
+    </p>
+  </div>
+
+  <div class="marquee" data-reveal>
+    <div class="marquee-track">
+      {items.map((p) => (
+        <div class="flex items-center gap-3 text-2xl md:text-3xl font-display font-semibold text-white/35 hover:text-white transition whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-cyber-400/60"></span>
+          {p}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

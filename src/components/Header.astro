@@ -1,19 +1,27 @@
 ---
-import { nav, site } from '../data/site';
+import { nav } from '../data/site';
 import { Icon } from 'astro-icon/components';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = currentPath === '/';
 ---
 
-<header class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-100">
+<header
+  class:list={[
+    'fixed top-0 inset-x-0 z-50 transition-all duration-300',
+    isHome ? 'is-hero' : 'is-solid',
+  ]}
+  data-header
+>
   <div class="container-x flex items-center justify-between h-16 md:h-20">
     <a href="/" class="flex items-center gap-2 group">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-brand-600 text-white font-bold shadow-sm group-hover:bg-brand-700 transition">
+      <span class="relative inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-cyber-400 to-brand-600 text-white font-bold shadow-lg group-hover:scale-105 transition">
+        <span class="absolute inset-0 rounded-xl bg-cyber-400/40 blur-md -z-10"></span>
         V
       </span>
       <span class="flex flex-col leading-tight">
-        <span class="font-display font-bold text-brand-900 text-lg">Versatile SOC</span>
-        <span class="text-[10px] uppercase tracking-[0.18em] text-ink-500">India Pvt Ltd</span>
+        <span class="font-display font-bold text-base md:text-lg" data-brand-name>Versatile SOC</span>
+        <span class="text-[10px] uppercase tracking-[0.18em]" data-brand-sub>India Pvt Ltd</span>
       </span>
     </a>
 
@@ -24,19 +32,23 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
           <div class="relative group">
             <a
               href={item.href}
-              class={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 transition ${isActive ? 'text-brand-700 bg-brand-50' : 'text-ink-700 hover:text-brand-700 hover:bg-brand-50/60'}`}
+              class:list={[
+                'px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 transition',
+                'nav-link',
+                isActive && 'is-active',
+              ]}
             >
               {item.label}
               <Icon name="lucide:chevron-down" class="w-3.5 h-3.5 transition group-hover:rotate-180" />
             </a>
             <div class="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-              <div class="min-w-[260px] bg-white rounded-2xl shadow-xl border border-slate-100 p-2">
+              <div class="min-w-[260px] bg-night-900/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/10 p-2">
                 {item.children.map((child) => (
                   <a
                     href={child.href}
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-ink-700 hover:bg-brand-50 hover:text-brand-700 transition"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-white/80 hover:bg-white/10 hover:text-cyber-300 transition"
                   >
-                    <Icon name="lucide:arrow-right" class="w-3.5 h-3.5 text-brand-500" />
+                    <Icon name="lucide:arrow-right" class="w-3.5 h-3.5 text-cyber-400" />
                     {child.label}
                   </a>
                 ))}
@@ -46,7 +58,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         ) : (
           <a
             href={item.href}
-            class={`px-4 py-2 rounded-full text-sm font-medium transition ${isActive ? 'text-brand-700 bg-brand-50' : 'text-ink-700 hover:text-brand-700 hover:bg-brand-50/60'}`}
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-medium transition',
+              'nav-link',
+              isActive && 'is-active',
+            ]}
           >
             {item.label}
           </a>
@@ -55,7 +71,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </nav>
 
     <div class="hidden lg:flex items-center gap-3">
-      <a href="/contact" class="btn btn-primary text-sm">
+      <a href="/contact" class="btn btn-accent text-sm">
         Let's Talk
         <Icon name="lucide:arrow-right" class="w-4 h-4" />
       </a>
@@ -63,7 +79,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
     <button
       type="button"
-      class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-ink-700 hover:bg-brand-50"
+      class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10 nav-link"
       aria-label="Open menu"
       data-menu-toggle
     >
@@ -72,23 +88,52 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </button>
   </div>
 
-  <div class="lg:hidden hidden border-t border-slate-100 bg-white" data-mobile-menu>
+  <div class="lg:hidden hidden border-t border-white/10 bg-night-900/95 backdrop-blur-lg" data-mobile-menu>
     <div class="container-x py-4 flex flex-col gap-1">
       {nav.map((item) => (
         <a
           href={item.href}
-          class="px-3 py-2.5 rounded-lg text-sm font-medium text-ink-700 hover:bg-brand-50 hover:text-brand-700"
+          class="px-3 py-2.5 rounded-lg text-sm font-medium text-white/85 hover:bg-white/10 hover:text-cyber-300"
         >
           {item.label}
         </a>
       ))}
-      <a href="/contact" class="btn btn-primary justify-center mt-3">
+      <a href="/contact" class="btn btn-accent justify-center mt-3">
         Let's Talk
         <Icon name="lucide:arrow-right" class="w-4 h-4" />
       </a>
     </div>
   </div>
 </header>
+
+<!-- spacer so non-hero pages don't sit behind the fixed header -->
+{!isHome && <div aria-hidden="true" class="h-16 md:h-20"></div>}
+
+<style>
+  [data-header] [data-brand-name],
+  [data-header] [data-brand-sub],
+  [data-header] .nav-link {
+    color: white;
+  }
+  [data-header] [data-brand-sub] { color: rgba(255,255,255,0.65); }
+  [data-header] .nav-link:hover { color: var(--color-cyber-300); }
+  [data-header] .nav-link.is-active {
+    background: rgba(255,255,255,0.08);
+    color: var(--color-cyber-300);
+  }
+
+  [data-header].is-hero {
+    background: transparent;
+    backdrop-filter: blur(0);
+  }
+  [data-header].is-hero.is-scrolled,
+  [data-header].is-solid {
+    background: rgba(7, 10, 22, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+</style>
 
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
@@ -100,4 +145,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     iconOpen?.classList.toggle('hidden');
     iconClose?.classList.toggle('hidden');
   });
+
+  const header = document.querySelector('[data-header]');
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 24) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 </script>

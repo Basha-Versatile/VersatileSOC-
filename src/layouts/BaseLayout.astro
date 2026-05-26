@@ -22,6 +22,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#070a16" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
     <title>{pageTitle}</title>
@@ -38,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
 
@@ -59,11 +60,27 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
       sameAs: Object.values(site.social),
     })} />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col bg-white text-ink-900">
     <Header />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Global scroll-reveal — adds .is-revealed to anything with [data-reveal] when it enters the viewport.
+      const reveal = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              reveal.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => reveal.observe(el));
+    </script>
   </body>
 </html>
