@@ -1,0 +1,23 @@
+---
+// TODO[placeholder]: Replace these numbers with the company's real, audited figures before going live.
+const stats = [
+  { value: '450+', label: 'Engineers & Specialists' },
+  { value: '120+', label: 'Successful Engagements' },
+  { value: '25+', label: 'Tape-outs Delivered' },
+  { value: '15+', label: 'Years of Combined Heritage' },
+];
+---
+
+<section class="bg-brand-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-pattern opacity-20"></div>
+  <div class="container-x relative py-14 md:py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      {stats.map((s) => (
+        <div class="text-center md:text-left">
+          <p class="font-display font-bold text-4xl md:text-5xl text-white">{s.value}</p>
+          <p class="mt-2 text-sm text-brand-200 uppercase tracking-wider">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

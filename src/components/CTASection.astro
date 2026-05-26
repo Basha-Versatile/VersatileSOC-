@@ -1,0 +1,42 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title?: string;
+  description?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  title = 'Have a product to build or a chip to tape out?',
+  description = "Tell us what you're working on. We'll come back within one business day with a clear next step — not a generic deck.",
+  primaryLabel = "Let's Talk",
+  primaryHref = '/contact',
+  secondaryLabel = 'Explore Services',
+  secondaryHref = '/services',
+} = Astro.props;
+---
+
+<section class="container-x py-20 md:py-24">
+  <div class="relative overflow-hidden rounded-3xl gradient-hero text-white p-10 md:p-16">
+    <div class="absolute inset-0 grid-pattern opacity-20"></div>
+    <div class="relative max-w-3xl">
+      <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl leading-tight text-balance">
+        {title}
+      </h2>
+      <p class="mt-5 text-brand-100/85 text-lg text-pretty">{description}</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href={primaryHref} class="btn btn-accent">
+          {primaryLabel}
+          <Icon name="lucide:arrow-right" class="w-4 h-4" />
+        </a>
+        <a href={secondaryHref} class="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">
+          {secondaryLabel}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="container-x py-32 md:py-40 text-center">
+    <p class="eyebrow inline-block">404</p>
+    <h1 class="mt-4 text-4xl md:text-5xl font-bold text-ink-900 leading-tight">
+      We can't find that page.
+    </h1>
+    <p class="mt-4 text-ink-500 max-w-xl mx-auto">
+      The link may be broken or the page may have moved. Try heading back to the homepage or explore our services.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a href="/" class="btn btn-primary">
+        <Icon name="lucide:home" class="w-4 h-4" />
+        Back to home
+      </a>
+      <a href="/services" class="btn btn-ghost">
+        Explore services
+        <Icon name="lucide:arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

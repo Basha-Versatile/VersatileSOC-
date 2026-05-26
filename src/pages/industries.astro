@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import { industries } from '../data/industries';
+import { Icon } from 'astro-icon/components';
+
+// TODO[placeholder]: These engagement examples are illustrative scenarios, not real customer
+// projects. Replace each entry with an actual past program (with customer permission) or
+// remove the "Representative Engagements" section from the JSX below.
+const useCases = [
+  {
+    industry: 'Automotive',
+    title: 'ADAS perception SoC verification',
+    description: 'Coverage-driven UVM environment and emulation acceleration for a Tier-1 ADAS supplier — closing functional and safety coverage on a 7nm SoC.',
+  },
+  {
+    industry: 'Networking',
+    title: 'Linerate switch ASIC architecture',
+    description: 'Architecture exploration, microarchitecture and RTL for a 12.8 Tbps switch silicon used in next-gen data centre fabrics.',
+  },
+  {
+    industry: 'IoT',
+    title: 'Industrial gateway BSP & OTA',
+    description: 'Yocto-based Linux BSP, secure boot chain and OTA framework powering a global manufacturer\'s industrial gateway portfolio.',
+  },
+  {
+    industry: 'Medical Devices',
+    title: 'Wearable patient monitor',
+    description: 'End-to-end design — silicon-side firmware, low-power algorithms and companion mobile app — for a continuous patient monitoring wearable.',
+  },
+];
+---
+
+<BaseLayout title="Industries" description="Industries we serve — semiconductor, automotive, networking, IoT, medical devices, consumer, AI and aerospace.">
+  <PageHero
+    eyebrow="Industries"
+    title="Engineering context, not just engineering hours."
+    description="The same architectural decision means different things in a 5G base station versus a wearable medical device. Our teams bring the right domain context to every engagement."
+  />
+
+  <section class="container-x py-20 md:py-24">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {industries.map((i) => (
+        <div class="card h-full">
+          <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 inline-flex items-center justify-center mb-4">
+            <Icon name={i.icon} class="w-6 h-6" />
+          </div>
+          <h3 class="font-display font-bold text-lg text-ink-900">{i.name}</h3>
+          <p class="text-ink-500 text-sm mt-2 leading-relaxed">{i.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-20 md:py-24">
+    <div class="container-x">
+      <div class="max-w-3xl mb-12">
+        <span class="eyebrow">Representative Engagements</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mt-3 leading-tight">
+          Programs we have delivered.
+        </h2>
+        <p class="text-ink-500 text-lg mt-4">
+          A small sample of the kinds of programs our teams typically run — across silicon, embedded and product engineering.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        {useCases.map((u) => (
+          <article class="bg-white border border-slate-100 rounded-2xl p-8 hover:border-brand-200 hover:shadow-lg transition">
+            <span class="text-xs uppercase tracking-wider font-bold text-accent-600">{u.industry}</span>
+            <h3 class="mt-2 font-display font-bold text-xl text-ink-900">{u.title}</h3>
+            <p class="mt-3 text-ink-500 leading-relaxed">{u.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

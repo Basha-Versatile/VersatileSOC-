@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import StatsBand from '../components/StatsBand.astro';
+import CTASection from '../components/CTASection.astro';
+import { Icon } from 'astro-icon/components';
+
+// TODO[placeholder]: Only keep certifications/standards the company actually holds. Claiming
+// ISO 9001 / ISO 27001 / IEC 62443 / ASPICE without a real audit is misleading and could
+// have legal/commercial consequences. Confirm and prune this list before going live.
+const certifications = [
+  { title: 'ISO 9001:2015', description: 'Quality management aligned to international standards.' },
+  { title: 'ISO 27001', description: 'Information security controls across people, process and tools.' },
+  { title: 'IEC 62443 Ready', description: 'Industrial cybersecurity practice for connected products.' },
+  { title: 'ASPICE Aware', description: 'Automotive software process improvement principles applied to delivery.' },
+];
+---
+
+<BaseLayout title="About Us" description="Who we are, how we work and the principles behind Versatile SOC India Pvt Ltd.">
+  <PageHero
+    eyebrow="About Versatile SOC"
+    title="An engineering services company built by engineers — for engineers."
+    description="We started Versatile SOC India Pvt Ltd to build the kind of engineering partner we always wished we had: senior, accountable, technically curious, and obsessed with the products our customers ship."
+  />
+
+  <!-- Story -->
+  <section class="container-x py-20 md:py-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7">
+        <span class="eyebrow">Our Story</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mt-3 leading-tight">
+          A partner that grows with your product — not just your headcount.
+        </h2>
+        {/* TODO[placeholder]: This founder/origin story is a generic narrative. Replace with the
+            real story of Versatile SOC India Pvt Ltd — founder names, when the company started,
+            why it was founded, the specific markets/customers it began with. */}
+        <div class="prose prose-lg mt-6 text-ink-700 leading-relaxed space-y-4">
+          <p>
+            Versatile SOC was founded by veteran semiconductor and embedded engineers who had spent two decades inside product companies and global services firms. We saw the same pattern repeat — talented engineers stuck inside slow processes, customers paying for resumes instead of outcomes, and the gap between silicon teams and software teams widening every year.
+          </p>
+          <p>
+            We set out to build a different kind of company. One where senior engineers own the work, where every program is staffed for the result and not the timesheet, and where the conversation with our customers is about chips, products and KPIs — not just utilization.
+          </p>
+          <p>
+            Today, our teams work across India and partner with product companies around the world — from fabless startups to large OEMs — across silicon, embedded, AI and cloud.
+          </p>
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-3xl bg-gradient-to-br from-brand-900 to-brand-700 p-8 text-white">
+          <p class="text-xs uppercase tracking-[0.18em] text-accent-300 font-bold">At a Glance</p>
+          {/* TODO[placeholder]: Replace Engineers / Tape-outs / Markets figures with real
+              audited numbers. Headquartered is confirmed Hyderabad. */}
+          <dl class="mt-6 grid grid-cols-2 gap-6">
+            <div>
+              <dt class="text-xs text-brand-200 uppercase tracking-wider">Headquartered</dt>
+              <dd class="font-display font-bold text-2xl mt-1">Hyderabad</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-brand-200 uppercase tracking-wider">Engineers</dt>
+              <dd class="font-display font-bold text-2xl mt-1">450+</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-brand-200 uppercase tracking-wider">Tape-outs</dt>
+              <dd class="font-display font-bold text-2xl mt-1">25+</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-brand-200 uppercase tracking-wider">Markets</dt>
+              <dd class="font-display font-bold text-2xl mt-1">8</dd>
+            </div>
+          </dl>
+          <a href="/contact" class="btn btn-accent mt-8 w-full justify-center">
+            Get in Touch
+            <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <StatsBand />
+
+  <!-- Quality & Compliance -->
+  <section id="quality" class="container-x py-20 md:py-24">
+    <SectionHeading
+      eyebrow="Quality & Compliance"
+      title="Process discipline, without the process theatre."
+      description="Our delivery framework borrows the best of automotive, aerospace and enterprise software practice — applied with judgement, not bureaucracy."
+    />
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      {certifications.map((c) => (
+        <div class="card h-full">
+          <Icon name="lucide:badge-check" class="w-9 h-9 text-brand-600 mb-4" />
+          <h3 class="font-display font-bold text-lg text-ink-900">{c.title}</h3>
+          <p class="text-ink-500 text-sm mt-2 leading-relaxed">{c.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    title="Looking for a long-term engineering partner?"
+    description="From a single embedded engineer to a full silicon design team — we structure engagements around your roadmap, not ours."
+  />
+</BaseLayout>

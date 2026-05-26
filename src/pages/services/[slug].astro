@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+import { Icon } from 'astro-icon/components';
+
+export async function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug);
+---
+
+<BaseLayout title={service.title} description={service.short}>
+  <PageHero eyebrow="Services" title={service.title} description={service.hero}>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="/contact" class="btn btn-accent">
+        Discuss your program
+        <Icon name="lucide:arrow-right" class="w-4 h-4" />
+      </a>
+      <a href="/services" class="btn bg-white/10 text-white hover:bg-white/20 border border-white/15">
+        All Services
+      </a>
+    </div>
+  </PageHero>
+
+  <!-- Overview -->
+  <section class="container-x py-20 md:py-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-8">
+        <span class="eyebrow">Overview</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mt-3 leading-tight">
+          {service.tagline}
+        </h2>
+        <p class="text-ink-700 text-lg leading-relaxed mt-6">{service.overview}</p>
+      </div>
+      <aside class="lg:col-span-4">
+        <div class="rounded-2xl bg-brand-50 border border-brand-100 p-8">
+          <p class="text-xs uppercase tracking-[0.18em] text-brand-700 font-bold">Outcomes you can expect</p>
+          <ul class="mt-5 space-y-3">
+            {service.outcomes.map((o) => (
+              <li class="flex items-start gap-2 text-ink-700">
+                <Icon name="lucide:check-circle-2" class="w-5 h-5 text-brand-600 mt-0.5 flex-shrink-0" />
+                <span>{o}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="bg-slate-50 py-20 md:py-24">
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="Capabilities"
+        title="What we cover, end-to-end."
+        description="Hire one specialism or engage the full practice as a turnkey team — the underlying engineering bench is the same."
+      />
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {service.capabilities.map((c) => (
+          <div class="card h-full">
+            <Icon name="lucide:cog" class="w-7 h-7 text-brand-600 mb-4" />
+            <h3 class="font-display font-bold text-lg text-ink-900">{c.title}</h3>
+            <p class="text-ink-500 text-sm mt-2 leading-relaxed">{c.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Services -->
+  <section class="container-x py-20 md:py-24">
+    <SectionHeading eyebrow="Explore more" title="Other capabilities" />
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      {others.map((o) => (
+        <a href={`/services/${o.slug}`} class="card h-full group">
+          <div class="w-11 h-11 rounded-lg bg-brand-50 text-brand-600 inline-flex items-center justify-center mb-4 group-hover:bg-brand-600 group-hover:text-white transition">
+            <Icon name={o.icon} class="w-5 h-5" />
+          </div>
+          <h3 class="font-display font-semibold text-base text-ink-900">{o.title}</h3>
+          <p class="text-ink-500 text-sm mt-2 leading-snug">{o.tagline}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    title={`Need help with ${service.title.toLowerCase()}?`}
+    description="Share what you're building — we'll suggest the smallest credible team, with senior engineers in the loop from day one."
+  />
+</BaseLayout>

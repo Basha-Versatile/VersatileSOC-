@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import StatsBand from '../components/StatsBand.astro';
+import CTASection from '../components/CTASection.astro';
+import { services } from '../data/services';
+import { industries } from '../data/industries';
+import { Icon } from 'astro-icon/components';
+
+const differentiators = [
+  {
+    icon: 'lucide:scan-search',
+    title: 'Concept to Completion',
+    description:
+      'One accountable team across silicon, hardware and software — no hand-off gaps between disciplines.',
+  },
+  {
+    icon: 'lucide:cpu',
+    title: 'Advanced Node Expertise',
+    description:
+      'Hands-on experience from mature nodes down to 5nm and 3nm, across logic, memory and mixed-signal designs.',
+  },
+  {
+    icon: 'lucide:shield-check',
+    title: 'Quality by Construction',
+    description:
+      'ISO 9001 and ISO 27001 aligned processes, with security and safety lifecycles built into how we deliver.',
+  },
+  {
+    icon: 'lucide:users',
+    title: 'A True Engineering Partner',
+    description:
+      'Outcome-based engagements, transparent reporting and senior engineers who stay with your program end-to-end.',
+  },
+];
+
+const pillars = [
+  {
+    icon: 'lucide:gauge',
+    title: 'Faster Time-to-Market',
+    description: 'Parallelized teams across silicon, embedded and apps compress critical-path schedules.',
+  },
+  {
+    icon: 'lucide:cpu',
+    title: 'Deep Silicon DNA',
+    description: 'Engineers who have shipped real chips into volume, not just toy designs and lab demos.',
+  },
+  {
+    icon: 'lucide:line-chart',
+    title: 'Measurable Outcomes',
+    description: 'Engagements scoped around KPIs — coverage, PPA, schedule and quality — not just hours.',
+  },
+  {
+    icon: 'lucide:lock',
+    title: 'IP-safe Collaboration',
+    description: 'Secure infrastructure and audited workflows protect every customer artefact end-to-end.',
+  },
+];
+
+// TODO[placeholder]: Replace these insight/blog cards with real published articles (or remove the
+// section entirely from the homepage JSX below until the blog is live).
+const insights = [
+  {
+    title: 'Designing for 3nm — what changes in your RTL hand-off',
+    summary:
+      'Margin assumptions, multi-VT mixes and clocking strategies that survive when the node moves under you.',
+    date: '2026-04-22',
+    tag: 'Silicon',
+  },
+  {
+    title: 'Edge AI on a $2 microcontroller — a practical playbook',
+    summary:
+      'Quantization, calibration and runtime choices for vision workloads that need to run on Cortex-M class parts.',
+    date: '2026-03-10',
+    tag: 'AI',
+  },
+  {
+    title: 'OTA done right — secure update pipelines for connected products',
+    summary:
+      'Why most OTA designs fail audits, and the patterns we use to ship signed, recoverable updates at scale.',
+    date: '2026-02-05',
+    tag: 'Embedded',
+  },
+];
+
+// TODO[placeholder]: These testimonials are fabricated samples with generic attribution.
+// Replace each with a real quote + named author + company before publishing, or remove
+// the testimonials section from the homepage JSX below.
+const testimonials = [
+  {
+    quote:
+      'Versatile SOC ran our verification ramp like an internal team. Coverage closed on schedule and our first silicon came up clean.',
+    author: 'VP Engineering',
+    company: 'Fabless Networking Company',
+  },
+  {
+    quote:
+      'They picked up an in-flight Linux BSP, untangled the upstream story and shipped us a kernel we can actually maintain.',
+    author: 'Director of Platform',
+    company: 'Industrial IoT OEM',
+  },
+  {
+    quote:
+      "We've worked with the big names. The difference here is senior engineers, every week, with answers — not just status.",
+    author: 'CTO',
+    company: 'AI Hardware Startup',
+  },
+];
+---
+
+<BaseLayout
+  title="Silicon, Software & Systems — Engineered for What Comes Next"
+  description="Versatile SOC India Pvt Ltd is a turnkey engineering services partner for semiconductor, embedded, AI and cloud product teams."
+>
+  <!-- Hero -->
+  <section class="relative gradient-hero text-white overflow-hidden">
+    <div class="absolute inset-0 grid-pattern opacity-25"></div>
+    <div class="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-accent-500/20 blur-3xl"></div>
+    <div class="container-x relative py-24 md:py-32 lg:py-36">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 fade-up">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs font-bold uppercase tracking-[0.18em] text-accent-300 border border-white/15">
+            <Icon name="lucide:sparkles" class="w-3.5 h-3.5" />
+            Engineering Services • India
+          </span>
+          <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.6rem] font-bold leading-[1.05] text-balance">
+            Silicon, Software & Systems —
+            <span class="text-accent-400">engineered for what comes next.</span>
+          </h1>
+          <p class="mt-6 text-lg md:text-xl text-brand-100/85 max-w-2xl text-pretty">
+            Versatile SOC India Pvt Ltd is the end-to-end engineering partner behind ambitious chips, connected products and AI-powered platforms. One accountable team — from concept and architecture to silicon, firmware, cloud and certification.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="/contact" class="btn btn-accent">
+              Start a Conversation
+              <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            </a>
+            <a href="/services" class="btn bg-white/10 text-white hover:bg-white/20 border border-white/15">
+              Explore Capabilities
+            </a>
+          </div>
+
+          {/* TODO[placeholder]: Replace these hero stats with real, audited figures (tape-outs,
+              engineers, node experience, delivery model) before going live. */}
+          <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl">
+            <div>
+              <p class="font-display font-bold text-2xl text-white">25+</p>
+              <p class="text-xs text-brand-200 uppercase tracking-wider mt-1">Tape-outs</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-2xl text-white">450+</p>
+              <p class="text-xs text-brand-200 uppercase tracking-wider mt-1">Engineers</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-2xl text-white">5nm</p>
+              <p class="text-xs text-brand-200 uppercase tracking-wider mt-1">Node Experience</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-2xl text-white">24×7</p>
+              <p class="text-xs text-brand-200 uppercase tracking-wider mt-1">Delivery Model</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 fade-up fade-up-delay-2">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-accent-500/20 to-brand-400/20 rounded-3xl blur-2xl"></div>
+            <div class="relative bg-white/5 backdrop-blur border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl">
+              <p class="text-xs uppercase tracking-[0.18em] text-accent-300 font-bold">Where We Help</p>
+              <ul class="mt-5 space-y-4">
+                {services.slice(0, 5).map((s) => (
+                  <li class="flex items-start gap-3 group">
+                    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-white/10 inline-flex items-center justify-center text-accent-300 group-hover:bg-accent-500 group-hover:text-white transition">
+                      <Icon name={s.icon} class="w-4 h-4" />
+                    </span>
+                    <div>
+                      <a href={`/services/${s.slug}`} class="font-semibold text-white hover:text-accent-300 transition">
+                        {s.title}
+                      </a>
+                      <p class="text-sm text-brand-100/70 mt-0.5">{s.tagline}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition Strip -->
+  <section class="border-y border-slate-100 bg-slate-50/50">
+    <div class="container-x py-8 flex flex-wrap items-center justify-between gap-6">
+      <p class="text-sm uppercase tracking-[0.18em] text-ink-500 font-semibold">Trusted across</p>
+      <div class="flex flex-wrap items-center gap-x-10 gap-y-4 text-ink-700 font-display font-semibold">
+        <span>Semiconductor</span>
+        <span class="text-ink-300">•</span>
+        <span>Automotive</span>
+        <span class="text-ink-300">•</span>
+        <span>Networking</span>
+        <span class="text-ink-300">•</span>
+        <span>IoT & Industrial</span>
+        <span class="text-ink-300">•</span>
+        <span>Medical Devices</span>
+        <span class="text-ink-300">•</span>
+        <span>AI & Robotics</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="container-x py-20 md:py-24">
+    <SectionHeading
+      eyebrow="What We Do"
+      title="A complete engineering stack, under one roof."
+      description="We close the gap between silicon, embedded software and cloud — so you ship a coherent product, not five disconnected modules."
+    />
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((s) => (
+        <ServiceCard
+          title={s.title}
+          description={s.short}
+          href={`/services/${s.slug}`}
+          icon={s.icon}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- What Makes Us Unique -->
+  <section class="bg-gradient-to-b from-slate-50 to-white py-20 md:py-24">
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="What Sets Us Apart"
+        title="Senior engineers. Accountable outcomes. Production track record."
+        description="The teams behind Versatile SOC have shipped real products into the field — from networking ASICs to smart cameras, from medical wearables to autonomous robots."
+      />
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {differentiators.map((d) => (
+          <div class="card h-full">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 inline-flex items-center justify-center mb-5">
+              <Icon name={d.icon} class="w-6 h-6" />
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink-900 mb-2">{d.title}</h3>
+            <p class="text-ink-500 text-sm leading-relaxed">{d.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission / Vision / Values -->
+  <section class="container-x py-20 md:py-24">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="relative overflow-hidden rounded-2xl bg-brand-900 text-white p-8">
+        <div class="absolute -bottom-12 -right-12 w-44 h-44 rounded-full bg-brand-700/40 blur-2xl"></div>
+        <p class="text-xs uppercase tracking-[0.18em] text-accent-300 font-bold mb-3">Mission</p>
+        <h3 class="font-display text-2xl font-bold leading-tight">
+          Make ambitious engineering reachable for product teams of every size.
+        </h3>
+        <p class="text-brand-100/80 mt-4 text-sm leading-relaxed relative">
+          We assemble senior, full-stack teams that take ownership from spec to ship — so our customers can focus on product, not co-ordination.
+        </p>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 p-8">
+        <p class="eyebrow mb-3">Vision</p>
+        <h3 class="font-display text-2xl font-bold leading-tight text-ink-900">
+          Become the default engineering partner for the next wave of intelligent hardware.
+        </h3>
+        <p class="text-ink-500 mt-4 text-sm leading-relaxed">
+          From edge AI in everyday devices to silicon that powers the data centres behind them — we want our fingerprints on the products that define the decade.
+        </p>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl bg-white border border-slate-100 p-8">
+        <p class="eyebrow mb-3">Values</p>
+        <ul class="space-y-2.5 mt-2 text-sm text-ink-700">
+          <li class="flex items-center gap-2"><Icon name="lucide:check" class="w-4 h-4 text-brand-600" /> Engineering rigour over theatre</li>
+          <li class="flex items-center gap-2"><Icon name="lucide:check" class="w-4 h-4 text-brand-600" /> Customer outcomes over scope creep</li>
+          <li class="flex items-center gap-2"><Icon name="lucide:check" class="w-4 h-4 text-brand-600" /> Transparency at every milestone</li>
+          <li class="flex items-center gap-2"><Icon name="lucide:check" class="w-4 h-4 text-brand-600" /> Compound learning across teams</li>
+          <li class="flex items-center gap-2"><Icon name="lucide:check" class="w-4 h-4 text-brand-600" /> Doing right by our people, first</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <StatsBand />
+
+  <!-- Pillars / Why Versatile SOC -->
+  <section class="container-x py-20 md:py-24">
+    <SectionHeading
+      eyebrow="Why Versatile SOC"
+      title="Built for teams that need engineering muscle without the overhead."
+      description="The right blend of senior leadership, deep specialists and process discipline — engaged the way you actually want to work."
+    />
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {pillars.map((p) => (
+        <div class="card h-full text-left">
+          <div class="w-11 h-11 rounded-lg bg-accent-500/10 text-accent-600 inline-flex items-center justify-center mb-4">
+            <Icon name={p.icon} class="w-5 h-5" />
+          </div>
+          <h3 class="font-display font-semibold text-lg text-ink-900 mb-1.5">{p.title}</h3>
+          <p class="text-ink-500 text-sm leading-relaxed">{p.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="bg-slate-50 py-20 md:py-24">
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="Industries We Serve"
+        title="Domain depth across the markets where hardware matters most."
+        description="From safety-critical automotive silicon to consumer wearables and AI accelerators — our engineers bring context, not just resumes."
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {industries.map((i) => (
+          <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-brand-200 transition">
+            <div class="w-11 h-11 rounded-lg bg-brand-50 text-brand-600 inline-flex items-center justify-center mb-4">
+              <Icon name={i.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="font-semibold text-ink-900 mb-1">{i.name}</h3>
+            <p class="text-ink-500 text-sm leading-relaxed">{i.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="container-x py-20 md:py-24">
+    <SectionHeading
+      eyebrow="What Customers Say"
+      title="Engineering partnerships that earn renewals."
+    />
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map((t) => (
+        <figure class="card h-full">
+          <Icon name="lucide:quote" class="w-7 h-7 text-brand-200 mb-4" />
+          <blockquote class="text-ink-700 leading-relaxed">"{t.quote}"</blockquote>
+          <figcaption class="mt-5 pt-5 border-t border-slate-100">
+            <p class="font-semibold text-ink-900">{t.author}</p>
+            <p class="text-sm text-ink-500">{t.company}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section class="bg-slate-50 py-20 md:py-24">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+        <div class="max-w-2xl">
+          <span class="eyebrow">Insights</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mt-3 leading-tight">
+            Notes from the engineering floor.
+          </h2>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {insights.map((i) => (
+          <article class="card h-full flex flex-col">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="text-accent-600 font-bold uppercase tracking-wider">{i.tag}</span>
+              <span class="text-ink-300">•</span>
+              <time class="text-ink-500">{new Date(i.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+            </div>
+            <h3 class="mt-3 font-display font-bold text-lg text-ink-900 leading-snug">{i.title}</h3>
+            <p class="mt-2 text-ink-500 text-sm leading-relaxed flex-1">{i.summary}</p>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+              Read article
+              <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            </span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

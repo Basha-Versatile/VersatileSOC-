@@ -1,0 +1,28 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  tag?: string;
+}
+
+const { title, description, href, icon, tag } = Astro.props;
+---
+
+<a href={href} class="card group flex flex-col h-full">
+  <div class="flex items-center justify-between mb-5">
+    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 inline-flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition">
+      <Icon name={icon} class="w-6 h-6" />
+    </div>
+    {tag && <span class="text-[10px] uppercase font-bold tracking-wider text-accent-600 bg-accent-500/10 px-2 py-1 rounded-full">{tag}</span>}
+  </div>
+  <h3 class="font-display font-bold text-xl text-ink-900 mb-2">{title}</h3>
+  <p class="text-ink-500 text-sm leading-relaxed flex-1">{description}</p>
+  <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 group-hover:text-brand-700">
+    Learn more
+    <Icon name="lucide:arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition" />
+  </span>
+</a>

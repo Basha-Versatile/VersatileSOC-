@@ -1,0 +1,78 @@
+---
+import { site } from '../data/site';
+import { services } from '../data/services';
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-brand-950 text-white mt-24">
+  <div class="container-x py-16 grid gap-12 lg:grid-cols-5 lg:gap-10">
+    <div class="lg:col-span-2">
+      <a href="/" class="flex items-center gap-3 mb-5">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white text-brand-700 font-bold">V</span>
+        <span class="flex flex-col leading-tight">
+          <span class="font-display font-bold text-lg">Versatile SOC</span>
+          <span class="text-[10px] uppercase tracking-[0.18em] text-brand-300">India Pvt Ltd</span>
+        </span>
+      </a>
+      <p class="text-brand-100/80 text-sm leading-relaxed max-w-md">
+        Semiconductor, embedded and AI engineering services for the product teams shaping the next decade of intelligent hardware.
+      </p>
+
+      <div class="mt-6 flex gap-3">
+        <a href={site.social.linkedin} class="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-accent-500 transition" aria-label="LinkedIn">
+          <Icon name="lucide:linkedin" class="w-4 h-4" />
+        </a>
+        <a href={site.social.twitter} class="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-accent-500 transition" aria-label="Twitter / X">
+          <Icon name="lucide:twitter" class="w-4 h-4" />
+        </a>
+        <a href={site.social.youtube} class="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-accent-500 transition" aria-label="YouTube">
+          <Icon name="lucide:youtube" class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-brand-300 mb-4">Services</h4>
+      <ul class="space-y-2.5 text-sm">
+        {services.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}`} class="text-brand-100/80 hover:text-white transition">{s.title}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-brand-300 mb-4">Company</h4>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/about" class="text-brand-100/80 hover:text-white transition">About Us</a></li>
+        <li><a href="/industries" class="text-brand-100/80 hover:text-white transition">Industries</a></li>
+        <li><a href="/contact" class="text-brand-100/80 hover:text-white transition">Contact</a></li>
+        <li><a href="/privacy" class="text-brand-100/80 hover:text-white transition">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-brand-300 mb-4">Reach Us</h4>
+      <ul class="space-y-3 text-sm">
+        <li class="flex items-start gap-2 text-brand-100/80">
+          <Icon name="lucide:map-pin" class="w-4 h-4 mt-0.5 text-accent-400" />
+          <span>{site.address.line1}<br>{site.address.line2}<br>{site.address.line3}</span>
+        </li>
+        <li class="flex items-center gap-2 text-brand-100/80">
+          <Icon name="lucide:mail" class="w-4 h-4 text-accent-400" />
+          <a href={`mailto:${site.email}`} class="hover:text-white transition">{site.email}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-brand-200">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <p>Designed and engineered in Hyderabad, India.</p>
+    </div>
+  </div>
+</footer>

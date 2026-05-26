@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout title="Services" description="VLSI, embedded, system design, AI/ML and cloud engineering services from Versatile SOC India Pvt Ltd.">
+  <PageHero
+    eyebrow="Services"
+    title="An end-to-end engineering stack you can engage as one team."
+    description="Five practice areas, one coherent delivery model. Engage them individually or as an integrated team that owns the full silicon-to-cloud journey."
+  />
+
+  <section class="container-x py-20 md:py-24">
+    <div class="space-y-6">
+      {services.map((s, i) => (
+        <div class="group grid lg:grid-cols-12 gap-8 items-center bg-white border border-slate-100 rounded-3xl p-8 md:p-10 hover:border-brand-200 hover:shadow-xl transition">
+          <div class="lg:col-span-1 flex lg:justify-center">
+            <span class="font-display font-bold text-5xl text-brand-200 group-hover:text-brand-500 transition">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+          </div>
+          <div class="lg:col-span-2 flex lg:justify-center">
+            <div class="w-20 h-20 rounded-2xl bg-brand-50 text-brand-600 inline-flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition">
+              <Icon name={s.icon} class="w-10 h-10" />
+            </div>
+          </div>
+          <div class="lg:col-span-7">
+            <h2 class="font-display font-bold text-2xl md:text-3xl text-ink-900 mb-2">{s.title}</h2>
+            <p class="text-ink-700 leading-relaxed">{s.short}</p>
+          </div>
+          <div class="lg:col-span-2 lg:text-right">
+            <a href={`/services/${s.slug}`} class="btn btn-primary text-sm">
+              Learn more
+              <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    title="Need a blended team across services?"
+    description="Most of our engagements span two or three practice areas. Tell us about your product — we'll propose the smallest team that can credibly own the outcome."
+  />
+</BaseLayout>
